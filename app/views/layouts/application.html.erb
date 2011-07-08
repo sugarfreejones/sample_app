@@ -11,7 +11,7 @@
 	<%= stylesheet_link_tag 'blueprint/screen' , :media => 'screen' %>
 	<%= stylesheet_link_tag 'blueprint/print' , :media => 'print' %>
 	<!--[if lt IE 8]> <%= stylesheet_link_tag 'blueprint/ie' , :media => 'screen' %><![endif]-->
-	<%= stylesheet_link_tag 'custom' , :media => 'print' %>
+	<%= stylesheet_link_tag 'custom' , :media => 'screen' %>
 </head>
 <body>
 
@@ -20,9 +20,9 @@
 	<%= image_tag("logo.png", :alt => "Sample App" , :class=>"round")  %>
 	<nav class="round">
 		<ul>
-			<li><%= link_to "Home" , '#' %>
-			<li><%= link_to "Help" , '#' %>
-			<li><%= link_to "Sign In" , '#' %>
+			<li><%= link_to "Home" , '#' %></li>
+			<li><%= link_to "Help" , '#' %></li>
+			<li><%= link_to "Sign In" , '#' %></li>
 		</ul>
 	</nav>
 </header>
