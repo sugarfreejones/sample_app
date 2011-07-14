@@ -28,17 +28,41 @@ describe SessionsController do
       it "should re-render the new page" do
         post :create, :session => @attr 
       end
- # for some reason, the title changes when we flash; we lose the Sign in title
- #     it "should have the right title" do
- #        post :create, :session => @attr
- #        response.should have_selector("title", :content => "Sign in")
- #      end
+      
+     # for some reason, the title changes when we flash; we lose the Sign in title
+     #     it "should have the right title" do
+     #        post :create, :session => @attr
+     #        response.should have_selector("title", :content => "Sign in")
+     #      end
 
       it "should have a flash.now message" do
         post :create, :session => @attr
         flash.now[:error].should =~ /invalid/i
       end
     
+    end
+    
+    describe "success" do
+      
+      before (:each) do 
+        @user = Factory(:user)
+        @attr = { :email => @user.email, :password => @user.password }
+      end
+      
+      it "should sign the user in" do
+        post :create, :session => @attr
+        # this controller object does not make sense to me here; why
+        # is all this "attached" to controller?
+        controller.current_user.should == @user
+        controller.should be_signed_in
+      end
+        
+      it "should redirect to the user show page" do
+         post :create, :session => @attr
+         response.should redirect_to(user_path(@user))
+      end
+      
+        
     end
     
   end
