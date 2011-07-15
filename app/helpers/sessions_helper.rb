@@ -5,7 +5,7 @@ module SessionsHelper
     # apparently, this used to be very hard to do.
     # encrypts the user id too
     cookies.permanent.signed[:remember_token] = [user.id , user.salt]
-    
+  
     current_user = user
     
   end
