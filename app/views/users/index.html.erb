@@ -1,3 +1,7 @@
+<h1>All users</h1>
+
+<%= will_paginate %> 
+
 <ul class="users">
   <% @users.each do |user| %>
     <li>
@@ -6,3 +10,16 @@
     </li>
   <% end %>
 </ul>
+
+<%
+# could also use this
+# <ul class="users">
+# <%= render @users %>
+# </ul>
+#
+# if we create a partial named users with the <li> in it
+# rails magic will iterate over the users object
+
+%>
+
+<%= will_paginate %> 
