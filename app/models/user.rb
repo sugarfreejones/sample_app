@@ -11,7 +11,7 @@
 #  salt               :string(255)
 #
 class User < ActiveRecord::Base
-  #attr_accessor is getter/setter
+  #attr_accessor is getter/setter - just creates methods for this
   attr_accessor :password
   # attr_accessible is what is avail from web; think params hash
   attr_accessible :name, :email , :password, :password_confirmation
