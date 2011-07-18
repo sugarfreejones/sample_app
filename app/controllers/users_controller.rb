@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
   
-  before_filter :authenticate , :only => ['edit', 'update']
-  before_filter :correct_user , :only => ['edit', 'update']
+  before_filter :authenticate , :only => [:index,:edit,:update]
+  before_filter :correct_user , :only => [:edit, :update]
+  
+  def index
+    @title = "All users"
+    @users = User.all
+  end
   
   def show
     @user = User.find(params[:id])
@@ -38,7 +43,10 @@ class UsersController < ApplicationController
       @title = "Edit User"
       render 'edit'
     end
-    
+  end
+  
+  def destroy
+  
   end
 
 private
@@ -48,5 +56,5 @@ private
     redirect_to(root_path) unless current_user?(@user)
   end
 
-  
+
 end
