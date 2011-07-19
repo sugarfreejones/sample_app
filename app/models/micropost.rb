@@ -18,7 +18,11 @@ class Micropost < ActiveRecord::Base
   #make the association to users
   belongs_to :user
   
+  validates :content , :presence => true, :length => { :maximum => 140 }
+  validates :user_id , :presence => true 
+  
   default_scope :order => 'microposts.created_at DESC'
+  
   
   
 end
