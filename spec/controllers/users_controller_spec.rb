@@ -111,8 +111,8 @@ describe UsersController do
       response.should have_selector('span.content', :content => mp2.content)
    end
 
-# for some reason could not get this to work. It's related to the 35 times   
 #  it "should paginate microposts" do
+# for some reason could not get this to work. It's related to the 35 times   
 #     35.times { Factory(:micropost, :user => @user, :content => "Yo mama is so ugly") }
 #     get :show, :id => @user.id
 #     response.should have_selector('div.pagination')
