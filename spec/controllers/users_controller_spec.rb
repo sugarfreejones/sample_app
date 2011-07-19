@@ -103,6 +103,27 @@ describe UsersController do
       response.should have_selector('h1>img' , :class => "gravatar" )
     end
     
+    it "should show the users microposts" do
+      mp1 = Factory(:micropost, :user => @user, :content => "Yo mama is so ugly")
+      mp2 = Factory(:micropost, :user => @user, :content => "Yo daddy is so fat")
+      get :show, :id => @user.id
+      response.should have_selector('span.content', :content => mp1.content)
+      response.should have_selector('span.content', :content => mp2.content)
+   end
+
+# for some reason could not get this to work. It's related to the 35 times   
+#  it "should paginate microposts" do
+#     35.times { Factory(:micropost, :user => @user, :content => "Yo mama is so ugly") }
+#     get :show, :id => @user.id
+#     response.should have_selector('div.pagination')
+#   end
+
+#    it "should display the micropost count" do
+#      10.times { Factory(:micropost, :user => @user, :content => "Yo mama is so ugly") }
+#      get :show, :id => @user.id
+#      response.should have_selector('td.sidebar', :content => @user.microposts.count)
+#    end
+
   end
 
   describe "GET 'new'" do

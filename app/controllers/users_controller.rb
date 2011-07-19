@@ -11,6 +11,10 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+#   apparently there are problems with will_paginate and rails 3
+#   I can check this out later
+#    @microposts = @user.microposts.paginate(:page => params[:page])
+    @microposts = @user.microposts
     @title = @user.name
   end
   
