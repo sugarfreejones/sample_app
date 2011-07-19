@@ -1,3 +1,4 @@
+
 # == Schema Information
 #
 # Table name: users
@@ -9,13 +10,22 @@
 #  updated_at         :datetime
 #  encrypted_password :string(255)
 #  salt               :string(255)
+#  admin              :boolean         default(FALSE)
 #
+
 class User < ActiveRecord::Base
-  #attr_accessor is getter/setter - just creates methods for this
+  
+  # attr_accessor is getter/setter - just creates methods for this
   attr_accessor :password
+  
   # attr_accessible is what is avail from web; think params hash
   attr_accessible :name, :email , :password, :password_confirmation
- 
+  
+  # make the association with microposts
+  
+  has_many :microposts , :dependent => :destroy
+  
+  
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
   validates :name,  :presence => true, 
@@ -69,6 +79,8 @@ class User < ActiveRecord::Base
     end
     
 end
+
+
 
 
 
