@@ -6,12 +6,13 @@ gem 'gravatar_image_tag'
 gem 'rake', '0.8.7'
 gem 'will_paginate'
 
+gem 'faker' 
 
 group :development  do
    gem 'rspec-rails'
    gem 'webrat'
    gem 'annotate'
-   gem 'faker'
+
 end
 
 
