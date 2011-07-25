@@ -1,8 +1,14 @@
 SampleApp::Application.routes.draw do
 
-  resources :users 
+  # this adds routes for /users/1/following, /users/1/followers
+  resources :users do
+    member do
+      get :following, :followers 
+    end
+  end
   resources :sessions, :only => [:new, :create, :destroy] 
   resources :microposts, :only => [:create, :destroy]
+  resources :relationships, :only => [:create, :destroy]
   
   root :to => "pages#home"
   match '/contact', :to => 'pages#contact'
