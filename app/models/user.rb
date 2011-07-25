@@ -25,6 +25,21 @@ class User < ActiveRecord::Base
   
   has_many :microposts , :dependent => :destroy
   
+  has_many :relationships, :foreign_key => "follower_id",
+                           :dependent => :destroy
+  
+  # need the class name because there is no reverse_relationship model
+  has_many :reverse_relationships,  :foreign_key => "followed_id",
+                                    :dependent => :destroy ,
+                                    :class_name => "Relationship"
+
+  
+  # the source attribute is used because there is no singular version of "followed";
+  # have to manually tell Rails what to use (want user.following instead of user.followeds)
+  has_many  :following, :through => :relationships, :source => :followed
+  
+  has_many :followers,  :through => :reverse_relationships, :source => :follower
+  
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
@@ -46,6 +61,18 @@ class User < ActiveRecord::Base
   
   def feed 
     Micropost.where("user_id = ?", id)
+  end
+  
+  def following?(followed)
+    self.relationships.find_by_followed_id(followed.id)
+  end
+  
+  def follow!(followed)
+    relationships.create!(:followed_id => followed.id)
+  end
+  
+  def unfollow!(followed)
+    self.relationships.find_by_followed_id(followed.id).destroy
   end
   
   class << self
