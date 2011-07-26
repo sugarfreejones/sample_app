@@ -1,33 +1,9 @@
 <h1>All users</h1>
 
-<%= will_paginate %> 
+<%= will_paginate %>
 
 <ul class="users">
-  <% @users.each do |user| %>
-    <li>
-      <%= gravatar_for user, :size => 30 %>
-      <%= link_to user.name, user %>
-      <% if current_user.admin? %>
-        | 
-        <%= link_to "delete", 
-                    user, 
-                    :method => :delete, 
-                    :confirm => "Delete user?", 
-                    :title => "Delete #{user.name}" %>
-      <% end %>
-    </li>
-  <% end %>
+  <%= render @users %>
 </ul>
 
-<%
-# could also use this
-# <ul class="users">
-# <%= render @users %>
-# </ul>
-#
-# if we create a partial named users with the <li> in it
-# rails magic will iterate over the users object
-
-%>
-
-<%= will_paginate %> 
+<%= will_paginate %>
